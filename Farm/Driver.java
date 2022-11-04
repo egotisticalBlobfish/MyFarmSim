@@ -4,6 +4,16 @@ import java.util.Scanner;
 
 public class main {
 	
+	public static void displayHeader( ) {
+        	System.out.println("Welcome to the game: My Farm!");
+    	}
+	
+	/*
+	public buySeeds( int nChoice, int nLevel, int nTotalGoldCoins ) {
+		
+	}
+	*/
+	
 	//main
 	public static void main(String[] args) {
 		
