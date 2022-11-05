@@ -4,8 +4,8 @@ public class Farmer {
     private String farmerName;
     private int farmerSeeds;
     private int farmerCoins;
-    private int farmerLevel;
-    //private int[][] farmerField;
+    private double farmerLevel;
+    private int[][] farmerField;
     int i, j;
 
     int cropType;
@@ -14,32 +14,37 @@ public class Farmer {
 
     /* Methods */
     // Displays the farmer's profile status
-    public void displayFarmerProfileStatus( String farmerName, int farmerSeeds, int farmerCoins, int farmerLevel ) {
+    public void displayFarmerProfileStatus( String farmerName, int farmerSeeds, int farmerCoins, double farmerLevel ) {
         System.out.println("Farmer's Profile");
         System.out.println("Farmer's Name: " + farmerName);
-        System.out.println("Current no. of seeds:" + farmerSeeds);
+        System.out.println("Current no. of seeds: " + farmerSeeds);
         System.out.println("Current ObjectCoins: " + farmerCoins);
-        System.out.println("Current Level: " + farmerLevel);
+        System.out.println("Current Level: " + farmerLevel + "\n");
     }
 
     /*
         This function display the board
     */
     public void displayFarmField( Farm farm ) {
-        System.out.println(farm.getFarmName(farmerName) + "'s Farm Field"+ "\n");
+        System.out.println(farmerName + "'s Level: " + farm.getFarmLevel());
+        System.out.println(farmerName + "'s Farm Field" + "\n");
 
         System.out.println("0\t1\t2\t3\t4\t5\t");
 
         for( i=0; i<10; i++ ) {
-            System.out.print(i+1 + "\t");
+            System.out.print((i + 1) + "\t");
             for( j=0; j<5; j++ ) {
                 if(farm.getFarmField()[i][j] == 0) {   // if getArr[][] is false, print(-)
-                    System.out.print(farm.getFarmField()[i][j] + "\t");
+                    System.out.print("x" + "\t");
+                }
+                else {
+                    System.out.print("+" + "\t");
                 }
             }
             System.out.println();
         }
     }
+
 
     public void displayMarketTransaction( Market market ) {
         System.out.println(farmerName + "'s ObjectCoins: " + farmerCoins);
@@ -77,15 +82,15 @@ public class Farmer {
     }
 
     // Farmer's level
-    public void setFarmerLevel( int farmerLevel ) {
+    public void setFarmerLevel( double farmerLevel ) {
         this.farmerLevel = farmerLevel;
     }
 
-    public int geFarmerLevel( ) {
+    public double getFarmerLevel( ) {
         return farmerLevel;
     }
 
-    /*
+    
     // Farmer's field
     public void setFarmerField( int[][] farmerField) {
         this.farmerField = farmerField;
@@ -94,6 +99,6 @@ public class Farmer {
     public int[][] getFarmerField( ) {
         return this.farmerField;
     }
-    */
+    
 
 }
