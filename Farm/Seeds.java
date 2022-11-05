@@ -3,61 +3,45 @@ public class Seeds {
 	public static int seeds(String seedIndex,int seedchoice, int totalcoins,int[] prices) {
 		switch(seedIndex) {
 			case "Turnip":
-				totalcoins=totalcoins-prices[seedchoice];
-			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+		
 						break;
 			
 			case "Carrot":
-				totalcoins=totalcoins-prices[seedchoice];
 			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
 						break;
 			
 			case "Potato":
-				totalcoins=totalcoins-prices[seedchoice];
-			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+	
 						break;
 			
 			case "Rose":
-				totalcoins=totalcoins-prices[seedchoice];
-			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+
 						break;
 			
 			case "Tulips":
-			totalcoins=totalcoins-prices[seedchoice];
-			
-			System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+
 						break;
 			
 			case "Sunflower":
-				totalcoins=totalcoins-prices[seedchoice];
-			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+	
 						break;
 			
 			case "Mango":
-				totalcoins=totalcoins-prices[seedchoice];
-			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+
 						break;
 			
 			case "Apple":
-				totalcoins=totalcoins-prices[seedchoice];
-			
-				System.out.println("Turnip seed is bought! your total coins is "+ totalcoins);
+		
 
 		}
-		return prices[seedchoice];
+		return ;
 	}
 	
 
 	
 	
 	//main
-	public static void main(String[] args) {
+	public  void plantSeeds(String[] args) {
 		
 		Scanner sc= new Scanner(System.in);
 
