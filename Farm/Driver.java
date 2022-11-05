@@ -63,6 +63,8 @@ public class Driver {
 
         String[] arrSeeds= {"Turnip","Carrot","Potato","Rose","Tulips","Sunflower","Mango","Apple"};
 	int[] arrPrices= {5, 10, 20, 5, 10, 20, 100, 200};
+	
+	String[] arrTools{"Plow","WateringCan","Fertilizer","Pickaxe","Shovel"};
 
 
         // Non-default values
