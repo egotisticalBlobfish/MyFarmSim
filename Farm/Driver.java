@@ -150,8 +150,10 @@ public class Driver {
                 }
             }while(nChoiceWork <= 0 && nChoiceWork >= 6);
            
-            sc.close();
+            
         } while( nDay != 2);
 
-    }
-}
+        sc.close();
+    } // End of Main method
+    
+} // End of Driver class
