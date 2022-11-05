@@ -121,22 +121,22 @@ public class Driver {
                                             
                                             nChoiceSeed = sc.nextInt();
 
-                                            // Compute gold coins
-                                            nObjectCoins = farmerUser.getFarmerCoins();
-                                            market.setNTotalGoldCoins(nObjectCoins);
-                                            market.setMarketSeeds(arrSeeds);
-                                            market.setMarketPrices(arrPrices);
-                                            market.setChoiceIndex(nChoiceSeed - 1);
-
-                                            farmerUser.displayMarketTransaction(market);
-                                            market.transactionBuySeeds( arrSeeds, arrPrices, nChoiceSeed - 1);
-                                            
-                                            nObjectCoins = market.getNTotalGoldCoins();
-                                            farmerUser.setFarmerCoins(nObjectCoins);
-                                            
-                                            System.out.println("Current ObjectCoins: " + nObjectCoins);
-
                                         } while(nChoiceSeed <= 0 || nChoiceSeed >= 9);
+					    
+					// Compute gold coins
+                                        nObjectCoins = farmerUser.getFarmerCoins();
+                                        market.setNTotalGoldCoins(nObjectCoins);
+                                        market.setMarketSeeds(arrSeeds);
+                                        market.setMarketPrices(arrPrices);
+                                        market.setChoiceIndex(nChoiceSeed - 1);
+
+                                        farmerUser.displayMarketTransaction(market);
+                                        market.transactionBuySeeds( arrSeeds, arrPrices, nChoiceSeed - 1);
+                                            
+                                        nObjectCoins = market.getNTotalGoldCoins();
+                                        farmerUser.setFarmerCoins(nObjectCoins);
+                                            
+                                        System.out.println("Current ObjectCoins: " + nObjectCoins);
                                     }
                                     else {
                                         System.out.println("You choose: [2] Sell Crops");
