@@ -1,6 +1,6 @@
 /*
     Introductory Comment
- */
+*/
 
 import java.util.Scanner;
 
@@ -18,6 +18,19 @@ public class Driver {
         System.out.println("\t[3] Work on Farm");
         System.out.println("\t[4] Go To Market");
         System.out.println("\t[5] Sleep");
+    }
+
+    public static void displayFarmingFlag() {
+        //Ask user what to do in farm:
+        System.out.println("\nWhat to do in Farm Field: ");
+        System.out.println("\t[1] Plow a tile");
+        System.out.println("\t[2] Plant a seed in a tile");
+        System.out.println("\t[3] Water a seed in a tile");
+        System.out.println("\t[4] Fertilize a seed in a tile");
+        System.out.println("\t[5] Harvest a crop in a tile");
+        System.out.println("\t[6] Pickaxe a rock in a tile");
+        System.out.println("\t[7] Shovel a withered crop in a tile");
+        
     }
 
     public static void displayMarketFlag( ) {
@@ -38,7 +51,7 @@ public class Driver {
         int nDay = 0;
         int nSeeds = 0;
         int nObjectCoins = 100;
-        int nFarmerLevel = 0;
+        double dFarmerLevel = 0.0d;
         int[][] arrFarmField = new int[10][5];
         int i, j;
 
@@ -54,8 +67,15 @@ public class Driver {
 
         // Non-default values
         int nChoiceWork;
+        int nChoiceFarm;
         int nChoiceMarket;
         int nChoiceSeed;
+        int nChoiceSell;
+
+        int nPlowFieldRow;
+        int nPlowFieldCol;
+
+        int nBuySeeds;
 
 
         /***** Game Play ******/
@@ -71,12 +91,12 @@ public class Driver {
         farmerUser.setFarmerName(strUserName); 
         farmerUser.setFarmerSeeds(nSeeds);
         farmerUser.setFarmerCoins(nObjectCoins);
-        farmerUser.setFarmerLevel(nFarmerLevel);
-        farmerUser.displayFarmerProfileStatus(farmerUser.getFarmerName(), farmerUser.getFarmerSeeds(), farmerUser.getFarmerCoins(), farmerUser.geFarmerLevel());
+        farmerUser.setFarmerLevel(dFarmerLevel);
+        farmerUser.setFarmerField(arrFarmField);
+        farmerUser.displayFarmerProfileStatus(farmerUser.getFarmerName(), farmerUser.getFarmerSeeds(), farmerUser.getFarmerCoins(), farmerUser.getFarmerLevel());
 
         // Farm
         Farm farmerField = new Farm( );
-        farmerField.setFarmName(strUserName);
         farmerField.setFarmField(arrFarmField);
         
         farmerUser.displayFarmField(farmerField);
@@ -96,11 +116,58 @@ public class Driver {
 
                 switch(nChoiceWork) {
                     case 1:     System.out.println("You choose: [1] Check Farmer's Status");
-                                farmerUser.displayFarmerProfileStatus(farmerUser.getFarmerName(), farmerUser.getFarmerSeeds(), farmerUser.getFarmerCoins(), farmerUser.geFarmerLevel());
+                                farmerUser.displayFarmerProfileStatus(farmerUser.getFarmerName(), farmerUser.getFarmerSeeds(), farmerUser.getFarmerCoins(), farmerUser.getFarmerLevel());
                                 break;
                     case 2:     System.out.println("You choose: [2] View and Equip Tools");
                                 break;
                     case 3:     System.out.println("You choose: [3] Work on Farm");
+
+                                do{
+                                    displayFarmingFlag();
+                                    nChoiceFarm = sc.nextInt();
+
+                                    switch(nChoiceFarm) {
+                                        case 1:     // Ask the user which tile to plow
+                                                    System.out.println("You choose: [1] Plow a tile");
+                                                    System.out.println("Choose a tile to plow: ");
+                                                    System.out.println("Row (1 to 10): ");      // get the row
+                                                    nPlowFieldRow = sc.nextInt();                   
+                                                    System.out.println("Column (1 to 5): ");    // get the column
+                                                    nPlowFieldCol = sc.nextInt();
+
+                                                    // Set the farmer's level
+                                                    dFarmerLevel = farmerUser.getFarmerLevel();
+                                                    farmerField.setFarmLevel(dFarmerLevel);
+
+                                                    // Set the farmer's fiel
+                                                    arrFarmField = farmerUser.getFarmerField();
+                                                    farmerField.setFarmField(arrFarmField);
+
+                                                    // Call the farm class to plow a tile
+                                                    farmerField.farmPlowFieldTile(nPlowFieldRow, nPlowFieldCol);
+                                                    dFarmerLevel = farmerField.getFarmLevel();  // Get the new farmer's level after plowing
+                                                    arrFarmField = farmerField.getFarmField();  // Get the new farmer's field after plowing
+
+                                                    farmerUser.setFarmerLevel(dFarmerLevel);    // Set the new farmer's level after plowing
+                                                    farmerUser.setFarmerField(arrFarmField);    // Set the new farmer's level after plowing
+                                                    farmerUser.displayFarmField(farmerField);   // Display
+                                                    break;
+                                        case 2:     System.out.println("You choose: [2] Plant a seed in a tile");
+                                                    break;
+                                        case 3:     System.out.println("You choose: [3] Water a seed in a tile");
+                                                    break;
+                                        case 4:     System.out.println("You choose: [4] Fertilize a seed in a tile");
+                                                    break;
+                                        case 5:     System.out.println("You choose: [5] Harvest a crop in a tile");
+                                                    break;
+                                        case 6:     System.out.println("You choose: [6] Pickaxe a rock in a tile");
+                                                    break;
+                                        case 7:     System.out.println("You choose: [7] Shovel a withered crop in a tile");
+                                                    break;
+                                    }
+                                    
+                                }while(nChoiceFarm <= 0 || nChoiceFarm >= 8);
+
                                 break;
                     case 4:     System.out.println("You choose: [4] Go To Market");
                                 
@@ -122,24 +189,36 @@ public class Driver {
                                             nChoiceSeed = sc.nextInt();
 
                                         } while(nChoiceSeed <= 0 || nChoiceSeed >= 9);
-					    
-					// Compute gold coins
+
+                                        System.out.println("How many seeds would you like to buy?");
+                                        System.out.println("No. of seeds: ");
+                                        nBuySeeds = sc.nextInt();
+
+                                        // Compute gold coins
                                         nObjectCoins = farmerUser.getFarmerCoins();
+                                        nSeeds = farmerUser.getFarmerSeeds();
                                         market.setNTotalGoldCoins(nObjectCoins);
+                                        market.setNTotalSeeds(nSeeds);
                                         market.setMarketSeeds(arrSeeds);
                                         market.setMarketPrices(arrPrices);
                                         market.setChoiceIndex(nChoiceSeed - 1);
 
                                         farmerUser.displayMarketTransaction(market);
-                                        market.transactionBuySeeds( arrSeeds, arrPrices, nChoiceSeed - 1);
-                                            
+                                        market.transactionBuySeeds( arrSeeds, arrPrices, nChoiceSeed - 1, nBuySeeds);
+                                        
                                         nObjectCoins = market.getNTotalGoldCoins();
                                         farmerUser.setFarmerCoins(nObjectCoins);
-                                            
-                                        System.out.println("Current ObjectCoins: " + nObjectCoins);
+                                        nSeeds = market.getNTotalSeeds();
+                                        farmerUser.setFarmerSeeds(nSeeds);
+                                        
+                                        System.out.println("Current ObjectCoins: " + nObjectCoins + "g");
+                                        System.out.println("Current no. of seeds: " + nSeeds);
                                     }
                                     else {
                                         System.out.println("You choose: [2] Sell Crops");
+                                        nChoiceSell = 0;
+
+                                        market.transactionSellCrops(arrSeeds, arrPrices, nChoiceSell);
                                     }
                                 }while(nChoiceMarket != 1 && nChoiceMarket != 2);
 
@@ -149,11 +228,11 @@ public class Driver {
                                 break;
                 }
             }while(nChoiceWork <= 0 && nChoiceWork >= 6);
-           
+
             
         } while( nDay != 2);
 
         sc.close();
     } // End of Main method
-    
+
 } // End of Driver class
