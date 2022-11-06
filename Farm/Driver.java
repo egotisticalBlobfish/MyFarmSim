@@ -198,11 +198,14 @@ public class Driver {
                                                         // Call the farm class to plow a tile
                                                         farmerField.farmPlowFieldTile(nPlowFieldRow, nPlowFieldCol);
                                                         tool.toolComputeFarmerLevel();
+                                                        tool.toolComputeFarmerObjectCoins();
                                                         dFarmerLevel = tool.getToolFarmerLevel();   // Get the new farmer's level after plowing
+                                                        nObjectCoins = tool.getToolObjectCoins();
                                                         arrFarmField = farmerField.getFarmField();  // Get the new farmer's field after plowing
                                                     
                                                         // Set the new updated values
                                                         farmerUser.setFarmerLevel(dFarmerLevel);    // Set the new farmer's level after plowing
+                                                        farmerUser.setFarmerCoins(nObjectCoins);
                                                         farmerUser.setFarmerField(arrFarmField);    // Set the new farmer's level after plowing
                                                     
                                                         // Display farmer's updated profile
