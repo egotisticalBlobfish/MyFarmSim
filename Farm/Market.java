@@ -1,13 +1,14 @@
-import java.util.Scanner;
+
 
 public class Market {
     private int nTotalGoldCoins;
-    private int nTotalSeeds;
+    private int[] nSeedPerCrop;
+    private int nTotalNumSeeds;
     private String[] marketSeeds;
     private int[] marketPrices;
     private int choiceIndex;
 
-    Scanner sc = new Scanner(System.in);
+    
 
     /* Methods */
 
@@ -22,46 +23,48 @@ public class Market {
                             System.out.println("Insuffifient Objectcoins!\n");
                         }
 
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                                                 
                         break;
             case 1:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
             case 2:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
             case 3:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
             case 4:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
             case 5:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
             case 6:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
             case 7:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         System.out.println(marketSeeds[choiceIndex] + " is bought!");
                         System.out.println("Total purchase price: " + (marketPrices[choiceIndex] * nPurchaseSeeds) + "g");
-                        nTotalSeeds = nTotalSeeds + nPurchaseSeeds;
+                        nSeedPerCrop[choiceIndex] = nSeedPerCrop[choiceIndex] + nPurchaseSeeds;
                         break;
 
         }
+
+        nTotalNumSeeds = nTotalNumSeeds + nPurchaseSeeds;
 
     } // End of transactionBuySeeds method
 
@@ -79,12 +82,12 @@ public class Market {
         return this.nTotalGoldCoins;
     }
 
-    public void setNTotalSeeds( int nTotalSeeds ) {
-        this.nTotalSeeds = nTotalSeeds;
+    public void setNSeedPerCrop( int[] nSeedPerCrop ) {
+        this.nSeedPerCrop = nSeedPerCrop;
     }
 
-    public int getNTotalSeeds( ) {
-        return nTotalSeeds;
+    public int[] getNSeedPerCrop( ) {
+        return nSeedPerCrop;
     }
 
     public void setMarketSeeds( String[] marketSeeds ) {
@@ -93,6 +96,14 @@ public class Market {
 
     public String[] getMarketSeeds( ) {
         return marketSeeds;
+    }
+
+    public void setNTotalNumSeeds( int nTotalNumSeeds ) {
+        this.nTotalNumSeeds = nTotalNumSeeds;
+    }
+
+    public int getNTotalNumSeeds( ) {
+        return nTotalNumSeeds;
     }
 
     public void setMarketPrices( int[] marketPrices ) {
