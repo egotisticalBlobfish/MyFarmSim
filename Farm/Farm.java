@@ -3,6 +3,7 @@ public class Farm {
     String[] farmSeedList;
     int[] farmSeedsPerCrop;
     int farmTotalSeeds;
+    int farmObjectCoins;
     int[][] farmField;
     double farmLevel;
     int i, j;
@@ -13,17 +14,16 @@ public class Farm {
      */
     public void farmPlowFieldTile( int nRow, int nCol ) {
         if(farmField[nRow-1][nCol-1] == 0) {
-            farmLevel = farmLevel + 0.5d;
-            farmField[nRow-1][nCol-1] = 1;  // (== 1) -- means the tile is plowed
-            System.out.println("Add Level: 0.5");
-            System.out.println("You plowed the tile: [" + nRow + "][" + nCol + "]");
+            farmField[nRow-1][nCol-1] = 1;  // (== 1) -- means the tile is done plowing
+
+            System.out.println("You plowed the tile: [" + nRow + "][" + nCol + "]\n");
         }
-        else if( farmField[nRow-1][nCol-1] == 1) {
+        else if( farmField[nRow-1][nCol-1] == 1) {  // tile is already plowed
             System.out.println("Tile: [" + nRow + "][" + nCol + "]");
             System.out.println("This tile is already plowed!\n");
         }
         else if(farmField[nRow-1][nCol-1] >= 21 && farmField[nRow-1][nCol-1] <= 27) {
-            System.out.println("This tile is has a plant: [" + nRow + "][" + nCol + "]");
+            System.out.println("This tile is has a plant: [" + nRow + "][" + nCol + "]\n");
         }
     }
 
@@ -31,9 +31,10 @@ public class Farm {
     public void farmPlantFieldTile( int nRow, int nCol, int choiceIndex ) {
         if(farmField[nRow-1][nCol-1] == 1) {    // (== 1) -- means the tile is plowed
             System.out.println("This tile is PLOWED: [" + (nRow) + "][" + (nCol)  + "]");
-            System.out.println("This is ready for planting!");
+            System.out.println("Ready for planting!");
 
             if(farmTotalSeeds != 0) {
+
                 if(farmSeedsPerCrop[choiceIndex - 1] == 0) {
                     System.out.println("Seed [" + choiceIndex + "]: " + farmSeedList[choiceIndex - 1] + "\tNo. of seed: " + farmSeedsPerCrop[choiceIndex - 1]);
                     System.out.println("You have insufficient number of seeds!");
@@ -48,31 +49,31 @@ public class Farm {
 
                     
                     switch(choiceIndex - 1) {
-                        case 0:     farmField[nRow-1][nCol-1] = 20;
+                        case 0:     farmField[nRow-1][nCol-1] = 20; // Turnip
                                     break;
-                        case 1:     farmField[nRow-1][nCol-1] = 21;
+                        case 1:     farmField[nRow-1][nCol-1] = 21; // Carrot
+                                    break; 
+                        case 2:     farmField[nRow-1][nCol-1] = 22; // Potato
                                     break;
-                        case 2:     farmField[nRow-1][nCol-1] = 22;
+                        case 3:     farmField[nRow-1][nCol-1] = 23; // Rose
                                     break;
-                        case 3:     farmField[nRow-1][nCol-1] = 23;
+                        case 4:     farmField[nRow-1][nCol-1] = 24; // Tulip
                                     break;
-                        case 4:     farmField[nRow-1][nCol-1] = 24;
+                        case 5:     farmField[nRow-1][nCol-1] = 25; // Sunflower
                                     break;
-                        case 5:     farmField[nRow-1][nCol-1] = 25;
+                        case 6:     farmField[nRow-1][nCol-1] = 26; // Mango
                                     break;
-                        case 6:     farmField[nRow-1][nCol-1] = 26;
-                                    break;
-                        case 7:     farmField[nRow-1][nCol-1] = 27;
+                        case 7:     farmField[nRow-1][nCol-1] = 27; // Apple
                                     break;
                     }
                     
                 } 
             }
-            else {
+            else {  // Insufficient number of chosen seed
                 System.out.println("You have insuffient seed!\n");
             }
         }
-        else {
+        else {  // Tile unplowed
             System.out.println("This tile is NOT READY for planting: [" + nRow + "][" + nCol + "]\n");
         }
     }
@@ -118,5 +119,5 @@ public class Farm {
         return farmLevel;
     }
 
-
+    
 }
