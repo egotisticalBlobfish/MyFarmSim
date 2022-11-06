@@ -9,7 +9,6 @@ public class Market {
     private int choiceIndex;
 
     
-
     /* Methods */
 
     public void transactionBuySeeds( String[] marketSeeds, int[] marketPrices, int choiceIndex, int nPurchaseSeeds) {
