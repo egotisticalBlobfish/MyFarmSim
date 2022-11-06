@@ -1,10 +1,9 @@
 public class Seeds {	
-	private int totalday;//day count for the plant
+	private int totalday=0;//day count for the plant
 	private Farm farm; //class access method
 	private String seedIndex;//seed index for choices
 	int i;
 	int j;
-	private int [][] seedQuantity; //counts the seeds of the specific plant
 	private int seedchoice ;// seed index
 	private int[] harvesttime; //array for the harvest time for the plant
 	private int[] waterneeds;// array for the ample water for the plant
@@ -18,14 +17,13 @@ public class Seeds {
 	public void plantSeeds( ) {
 			switch(seedIndex) {
 				case "Turnip":
-				//check if the land is plowed 
+				
 						 for( i=0; i<10; i++ ) {
 					            System.out.print((i + 1) + "\t");
 					            for( j=0; j<5; j++ ) {
 					            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
-					            		{
-					            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
-					            			totalday=totalday+1;//adds the total day
+					            		{	 
+					            			totalday=totalday+1;//adds the total day aka lifeline of the plant
 									
 					            			if (totalday==harvesttime[seedchoice]) {
 
@@ -35,7 +33,7 @@ public class Seeds {
 										
 										}
 										//checks water status
-										if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+										if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 										{
 											farm.farmField[i][j]='G';//sets the sign of a growing plant
 											System.out.println("The plant is still growing keep up the good work!");
@@ -58,7 +56,6 @@ public class Seeds {
 				            for( j=0; j<5; j++ ) {
 				            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==21) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 				            		{
-				            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 				            			totalday=totalday+1;//adds the total day
 								
 				            			if (totalday==harvesttime[seedchoice]) {
@@ -69,7 +66,7 @@ public class Seeds {
 									
 									}
 									//checks water status
-									if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+									if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 									{
 										farm.farmField[i][j]='G';//sets the sign of a growing plant
 										System.out.println("The plant is still growing keep up the good work!");
@@ -93,7 +90,7 @@ public class Seeds {
 					            for( j=0; j<5; j++ ) {
 					            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==22) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 					            		{
-					            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
+
 					            			totalday=totalday+1;//adds the total day
 									
 					            			if (totalday==harvesttime[seedchoice]) {
@@ -104,7 +101,7 @@ public class Seeds {
 										
 										}
 										//checks water status
-										if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+										if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 										{
 											farm.farmField[i][j]='G';//sets the sign of a growing plant
 											System.out.println("The plant is still growing keep up the good work!");
@@ -127,7 +124,6 @@ public class Seeds {
 				            for( j=0; j<5; j++ ) {
 				            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==23) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 				            		{
-				            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 				            			totalday=totalday+1;//adds the total day
 								
 				            			if (totalday==harvesttime[seedchoice]) {
@@ -138,7 +134,7 @@ public class Seeds {
 									
 									}
 									//checks water status
-									if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+									if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 									{
 										farm.farmField[i][j]='G';//sets the sign of a growing plant
 										System.out.println("The plant is still growing keep up the good work!");
@@ -158,11 +154,9 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==24) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
-			            		{
-			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==23) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		{			      
 			            			totalday=totalday+1;//adds the total day
-							
 			            			if (totalday==harvesttime[seedchoice]) {
 
 			            				farm.farmField[i][j]='H';//sets the sign that the plant is ready to harvest
@@ -171,7 +165,7 @@ public class Seeds {
 								
 								}
 								//checks water status
-								if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+								if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 								{
 									farm.farmField[i][j]='G';//sets the sign of a growing plant
 									System.out.println("The plant is still growing keep up the good work!");
@@ -193,11 +187,10 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==25) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==24) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
-			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
+	
 			            			totalday=totalday+1;//adds the total day
-							
 			            			if (totalday==harvesttime[seedchoice]) {
 
 			            				farm.farmField[i][j]='H';//sets the sign that the plant is ready to harvest
@@ -206,7 +199,7 @@ public class Seeds {
 								
 								}
 								//checks water status
-								if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+								if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 								{
 									farm.farmField[i][j]='G';//sets the sign of a growing plant
 									System.out.println("The plant is still growing keep up the good work!");
@@ -227,11 +220,9 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==26) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
-			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 			            			totalday=totalday+1;//adds the total day
-							
 			            			if (totalday==harvesttime[seedchoice]) {
 
 			            				farm.farmField[i][j]='H';//sets the sign that the plant is ready to harvest
@@ -240,7 +231,7 @@ public class Seeds {
 								
 								}
 								//checks water status
-								if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+								if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 								{
 									farm.farmField[i][j]='G';//sets the sign of a growing plant
 									System.out.println("The plant is still growing keep up the good work!");
@@ -262,9 +253,8 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==27) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
-			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 			            			totalday=totalday+1;//adds the total day
 							
 			            			if (totalday==harvesttime[seedchoice]) {
@@ -275,7 +265,7 @@ public class Seeds {
 								
 								}
 								//checks water status
-								if (watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
+								if (totalday==1||watercount[i][j]>=waterneeds[seedchoice]||watercount[i][j]>=waterneedsbonus[seedchoice]||fertilizercount[i][j]>=fertilizer[seedchoice]||fertilizercount[i][j]>=fertilizerbonus[seedchoice])// checks the farm if the specific tile is watered 
 								{
 									farm.farmField[i][j]='G';//sets the sign of a growing plant
 									System.out.println("The plant is still growing keep up the good work!");
@@ -293,6 +283,59 @@ public class Seeds {
 			}
 		
 	}
+	
+		//getters and setters
+		public void getTotalDay(int totalday) {
+		this.totalday=totalday;
+		}
+		public void getHarvestTime (int [] harvesttime) {
+			this.harvesttime=harvesttime;
+		}
+		public int[] setHarvestTime() {
+			return harvesttime;
+		}
+		public void getWaterneedsTime(int[] waterneeds) {
+			this.waterneeds=waterneeds;
+		}
+		public int[] setWaterneedsTime() {
+			return waterneeds;
+		}
+		public void getWaterneedsBonus(int [] waterneedsbonus) {
+			this.waterneedsbonus=waterneedsbonus;
+			
+		}
+		public int[] setWaterneedsBonus() {
+			return waterneedsbonus;
+		}
+		
+		public void getFertilizer(int[] fertilizer) {
+			this.fertilizer=fertilizer;
+		}
+		public int[] setFertilizer() {
+		return fertilizer;
+		}
+		public void getFertilizerBonus(int[] fertilizerbonus) {
+			this.fertilizerbonus=fertilizerbonus;
+		}
+		public int [] setFertilizerBonus() {
+			return fertilizerbonus;
+		}
+		
+		public void getWatercount(int[][] watercount) {
+			this.watercount=watercount; 
+		}
+		public int [][] setWatercount() {
+			return watercount;
+		}
+		public void getFertilizercount(int[][] fertilizercount) {
+			this.fertilizercount=fertilizercount;
+		}
+		public int[][] setfertilizercount(){
+			return fertilizercount;
+		}
+		
+
+		
 }
 	
 			
