@@ -27,7 +27,22 @@ public class Tools {
     }
 
     public void toolComputeFarmerObjectCoins( ) {
-        
+        switch( toolChoice - 1 ) {
+            case 0:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+            case 1:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+            case 2:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+            case 3:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+            case 4:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+            case 5:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+            case 6:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
+                        break;
+        }
     }
     
 
