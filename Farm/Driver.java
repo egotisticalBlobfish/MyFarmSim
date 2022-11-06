@@ -4,6 +4,7 @@
 
 import java.util.Scanner;
 
+
 public class Driver {
     
     public static void displayHeader( ) {
@@ -15,11 +16,10 @@ public class Driver {
         System.out.println("\nMain Menu: ");
         System.out.println("\t[1] Check Farmer's Status");
         System.out.println("\t[2] Display Farmer's Field");
-        System.out.println("\t[3] View and Equip Tools");
-        System.out.println("\t[4] Work on Farm");
-        System.out.println("\t[5] Go To Market");
-        System.out.println("\t[6] Advance to the Next Day: Sleep Now");
-        System.out.println("\n\t[0] Exit the Game");
+        System.out.println("\t[3] Work on Farm");
+        System.out.println("\t[4] Go To Market");
+        System.out.println("\t[5] Advance to the Next Day: Sleep Now");
+        System.out.println("\n\t[PRESS ANY KEY] Exit the Game");
     }
 
     public static void displayFarmingFlag() {
@@ -73,11 +73,18 @@ public class Driver {
         String[] arrSeedList = {"Turnip","Carrot","Potato","Rose","Tulips","Sunflower","Mango","Apple"};
 		int[] arrPriceList = {5, 10, 20, 5, 10, 20, 100, 200};
 
+        String[] arrToolList = {"Plow", "Plant", "Watering Can", "Fertilizer", "Harvest", "Pickaxe", "Shovel"};
+        int[] arrToolCostUsage = {0, 0, 0, 10, 0, 50, 7};
+        double[] arrToolExpGain = {0.5, 0.0, 0.5, 4.0, 0.0, 15.0, 2.0};
+
 
         // Non-default values
-        int nChoiceFinalExit;
+        int nChoiceConfirmExit;
         int nChoiceWork;
+
         int nChoiceFarm;
+        int nChoicePlow;
+
         int nChoiceMarket;
         int nChoiceSeed;
         int nChoiceSell;
@@ -114,16 +121,25 @@ public class Driver {
         // Farm
         Farm farmerField = new Farm( );
         farmerField.setFarmField(arrFarmField);
-        
-        farmerUser.displayFarmField(farmerField);
 
         // Market
         Market market = new Market( );
+        market.setMarketSeeds(arrSeedList);
+        market.setMarketPrices(arrPriceList);
+
+        // Tool
+        Tools tool = new Tools( );
+        tool.setToolList(arrToolList);
+        tool.setToolCostUsageList(arrToolCostUsage);
+        tool.setToolExpGainList(arrToolExpGain);
+
+        // Display
+        farmerUser.displayFarmField(farmerField);
 
 
         do{ // loop for the whole game
             do{ // loop to ask the user what to do per day
-                System.out.println("Day: " + nDay);
+                System.out.println("\n===== Day: " + nDay + " =====");
 
                 displayWorkFlag();
                 nChoiceWork = sc.nextInt();
@@ -134,9 +150,7 @@ public class Driver {
                                 break;
                     case 2:     System.out.println("You choose: [2] Display Farmer's Field");
                                 farmerUser.displayFarmField(farmerField);
-                    case 3:     System.out.println("You choose: [3] View and Equip Tools");
-                                break;
-                    case 4:     System.out.println("You choose: [4] Work on Farm");
+                    case 3:     System.out.println("You choose: [3] Work on Farm");
 
                                 do{
                                     displayFarmingFlag();
@@ -145,35 +159,58 @@ public class Driver {
                                     switch(nChoiceFarm) {
                                         case 1:     // Ask the user which tile to plow
                                                     System.out.println("You choose: [1] Plow a tile");
-                                                    
+
+                                                    // Set the values
+                                                    tool.setToolChoice(nChoiceFarm);
+                                                    nObjectCoins = farmerUser.getFarmerCoins();
+                                                    tool.setToolFarmerObjectCoins(nObjectCoins);
+
+                                                    // Display
+                                                    farmerUser.displayFarmWork(tool);
+
                                                     do{
-                                                        System.out.println("Choose a tile to plow: ");
-                                                        System.out.println("Row (1 to 10): ");      // get the row
-                                                        nPlowFieldRow = sc.nextInt();                   
-                                                        System.out.println("Column (1 to 5): ");    // get the column
-                                                        nPlowFieldCol = sc.nextInt();
+                                                        System.out.println("Do you still want to proceed? ");
+                                                        System.out.println("\t[1] YES" + "\t[0] NO\n");
+                                                        nChoicePlow = sc.nextInt();
 
-                                                    }while(nPlowFieldRow <= 0 || nPlowFieldRow >= 11 || nPlowFieldCol <= 0 || nPlowFieldCol >= 6);
-
-                                                    // Set the farmer's level
-                                                    dFarmerLevel = farmerUser.getFarmerLevel();
-                                                    farmerField.setFarmLevel(dFarmerLevel);
-
-                                                    // Set the farmer's field
-                                                    arrFarmField = farmerUser.getFarmerField();
-                                                    farmerField.setFarmField(arrFarmField);
-
-                                                    // Call the farm class to plow a tile
-                                                    farmerField.farmPlowFieldTile(nPlowFieldRow, nPlowFieldCol);
-                                                    dFarmerLevel = farmerField.getFarmLevel();  // Get the new farmer's level after plowing
-                                                    arrFarmField = farmerField.getFarmField();  // Get the new farmer's field after plowing
+                                                    }while(nChoicePlow < 0 || nChoicePlow >= 2);
                                                     
-                                                    // Set the new updated values
-                                                    farmerUser.setFarmerLevel(dFarmerLevel);    // Set the new farmer's level after plowing
-                                                    farmerUser.setFarmerField(arrFarmField);    // Set the new farmer's level after plowing
+
+                                                    if(nChoicePlow == 1) {
+                                                        do{
+                                                            System.out.println("Choose a tile to plow: ");
+                                                            System.out.println("Row (1 to 10): ");      // get the row
+                                                            nPlowFieldRow = sc.nextInt();                   
+                                                            System.out.println("Column (1 to 5): ");    // get the column
+                                                            nPlowFieldCol = sc.nextInt();
+
+                                                        }while(nPlowFieldRow <= 0 || nPlowFieldRow >= 11 || nPlowFieldCol <= 0 || nPlowFieldCol >= 6);
                                                     
-                                                    // Display farmer's updated profile
-                                                    farmerUser.displayFarmField(farmerField);
+
+                                                        // Set the farmer's level
+                                                        dFarmerLevel = farmerUser.getFarmerLevel();
+                                                        tool.setToolFarmerLevel(dFarmerLevel);
+
+                                                        // Set the farmer's field
+                                                        arrFarmField = farmerUser.getFarmerField();
+                                                        farmerField.setFarmField(arrFarmField);
+
+                                                        // Call the farm class to plow a tile
+                                                        farmerField.farmPlowFieldTile(nPlowFieldRow, nPlowFieldCol);
+                                                        tool.toolComputeFarmerLevel();
+                                                        dFarmerLevel = tool.getToolFarmerLevel();   // Get the new farmer's level after plowing
+                                                        arrFarmField = farmerField.getFarmField();  // Get the new farmer's field after plowing
+                                                    
+                                                        // Set the new updated values
+                                                        farmerUser.setFarmerLevel(dFarmerLevel);    // Set the new farmer's level after plowing
+                                                        farmerUser.setFarmerField(arrFarmField);    // Set the new farmer's level after plowing
+                                                    
+                                                        // Display farmer's updated profile
+                                                        farmerUser.displayFarmField(farmerField);
+                                                    }
+                                                    else {
+                                                        System.out.println("Back to Main Menu\n");
+                                                    }
                                                     break;
                                         case 2:     System.out.println("You choose: [2] Plant a seed in a tile");
                                                     
@@ -245,7 +282,7 @@ public class Driver {
                                 }while(nChoiceFarm < 0 || nChoiceFarm >= 8);
 
                                 break;
-                    case 5:     System.out.println("You choose: [5] Go To Market");
+                    case 4:     System.out.println("You choose: [4] Go To Market");
                                 
                                 do{ 
                                     displayMarketFlag();
@@ -276,8 +313,6 @@ public class Driver {
                                         market.setNTotalGoldCoins(nObjectCoins);
                                         market.setNTotalNumSeeds(nTotalSeeds);
                                         market.setNSeedPerCrop(arrSeedsPerCrop);
-                                        market.setMarketSeeds(arrSeedList);
-                                        market.setMarketPrices(arrPriceList);
                                         market.setChoiceIndex(nChoiceSeed - 1);
 
                                         farmerUser.displayMarketTransaction(market);
@@ -309,24 +344,24 @@ public class Driver {
                                 }while(nChoiceMarket < 0 || nChoiceMarket >= 3);
 
                                 break;
-                    case 6:     System.out.println("You choose: [6] Advance to the Next Day: Sleep Now");
+                    case 5:     System.out.println("You choose: [5] Advance to the Next Day: Sleep Now");
                                 nDay++;
                                 break;
-                    case 0:     System.out.println("You choose: [7] Exit the Game");
-                                System.out.println("\nAre you sure you want to 'EXIT' the game?");
-                                System.out.println("WARNING: Exiting the Game DOESN'T SAVE the game progress!");
-                                System.out.println("\n\t[0] - Exit the Game \t[1] - Resume the Game");
+                    default:    System.out.println("You choose: [ANY KEY] Exit the Game");
                                 break;            
-                }
+                }   
 
-                nChoiceFinalExit = sc.nextInt();
+            }while(nChoiceWork >=1 && nChoiceWork <= 5);
 
-            }while(nChoiceWork < 0 && nChoiceWork >= 7 && nChoiceFinalExit == 0);
-
-            System.out.println("Hope you enjoyed the game: MyFarm!");
-            System.out.println("Thank you!");
+            System.out.println("\nAre you sure you want to 'EXIT' the game?");
+            System.out.println("WARNING: Exiting the Game DOESN'T SAVE the game progress!");
+            System.out.println("\n\t[0] - Exit the Game \t[1] - Resume the Game");
+            nChoiceConfirmExit = sc.nextInt();
             
-        } while(nChoiceFinalExit != 0);
+        } while(nChoiceConfirmExit != 0);
+
+        System.out.println("Hope you enjoyed the game: MyFarm!");
+        System.out.println("Thank you!");
 
         sc.close();
     } // End of Main method
