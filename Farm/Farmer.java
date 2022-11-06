@@ -1,23 +1,27 @@
-import java.util.Scanner;
-
 public class Farmer {
     private String farmerName;
-    private int farmerSeeds;
+    private int[] farmerSeedsPerCrop;
+    private int farmerTotalSeeds;
     private int farmerCoins;
     private double farmerLevel;
     private int[][] farmerField;
-    int i, j;
+    private String[] farmerSeedList;
+    int i, j, k;
 
     int cropType;
-    Scanner in = new Scanner(System.in);
 
 
     /* Methods */
     // Displays the farmer's profile status
-    public void displayFarmerProfileStatus( String farmerName, int farmerSeeds, int farmerCoins, double farmerLevel ) {
+    public void displayFarmerProfileStatus( String farmerName, int[] farmerSeedsPerCrop, int farmerTotalSeeds, int farmerCoins, double farmerLevel ) {
         System.out.println("Farmer's Profile");
         System.out.println("Farmer's Name: " + farmerName);
-        System.out.println("Current no. of seeds: " + farmerSeeds);
+        System.out.println("Farmer's Seed List:");
+        for(k=0; k<8; k++) {
+            System.out.println("\t[" + k + "]" + farmerSeedList[k] + "\t: " + farmerSeedsPerCrop[k]);
+        }
+
+        System.out.println("Current no. of seeds: " + farmerTotalSeeds);
         System.out.println("Current ObjectCoins: " + farmerCoins);
         System.out.println("Current Level: " + farmerLevel + "\n");
     }
@@ -34,23 +38,53 @@ public class Farmer {
         for( i=0; i<10; i++ ) {
             System.out.print((i + 1) + "\t");
             for( j=0; j<5; j++ ) {
-                if(farm.getFarmField()[i][j] == 0) {   // if getArr[][] is false, print(-)
-                    System.out.print("x" + "\t");
+                
+                if(farm.getFarmField()[i][j] == 0) {        // Unplowed tile
+                    System.out.print("---" + "\t");
+                }
+                else if(farm.getFarmField()[i][j] == 1){    // Plowed tile 
+                    System.out.print("===" + "\t");   
                 }
                 else {
-                    System.out.print("+" + "\t");
+                    if(farm.getFarmField()[i][j] == 20) {   // Turnip plant
+                        System.out.print("TUR" + "\t");   
+                    }
+                    else if(farm.getFarmField()[i][j] == 21) {  // Carrot plant
+                        System.out.print("CAR" + "\t"); 
+                    }
+                    else if(farm.getFarmField()[i][j] == 22) {  // Potato plant
+                        System.out.print("POT" + "\t"); 
+                    }
+                    else if(farm.getFarmField()[i][j] == 23) {  // Rose plant
+                        System.out.print("ROS" + "\t"); 
+                    }
+                    else if(farm.getFarmField()[i][j] == 24) {  // Tulip plant
+                        System.out.print("TUL" + "\t"); 
+                    }
+                    else if(farm.getFarmField()[i][j] == 25) {  // Sunflower plant
+                        System.out.print("SUN" + "\t"); 
+                    }
+                    else if(farm.getFarmField()[i][j] == 26) {  // Mango plant
+                        System.out.print("MAN" + "\t"); 
+                    }
+                    else if(farm.getFarmField()[i][j] == 27) {  // Apple plant
+                        System.out.print("APP" + "\t"); 
+                    }
                 }
+                
             }
             System.out.println();
         }
     }
 
+    //public void display
 
     public void displayMarketTransaction( Market market ) {
         System.out.println(farmerName + "'s ObjectCoins: " + farmerCoins);
         System.out.println("You choose: [" + (market.getChoiceIndex() + 1) + "] " + market.getMarketSeeds()[market.getChoiceIndex()] + "!");
         System.out.println("Price: " + market.getMarketPrices()[market.getChoiceIndex()] + "g\n");
     }
+
 
 
     /* Getters and Setters */
@@ -63,13 +97,22 @@ public class Farmer {
         return this.farmerName;
     }
 
-    // Farmer's number of Seeds
-    public void setFarmerSeeds( int farmerSeeds ) {
-        this.farmerSeeds = farmerSeeds;
+    // Farmer's number of Seeds per Crop type
+    public void setFarmerSeedsPerCrop( int[] farmerSeedsPerCrop ) {
+        this.farmerSeedsPerCrop = farmerSeedsPerCrop;
     }
 
-    public int getFarmerSeeds( ) {
-        return farmerSeeds;
+    public int[] getFarmerSeedsPerCrop( ) {
+        return farmerSeedsPerCrop;
+    }
+
+    // Farmer's total number of seeds
+    public void setFarmerTotalSeeds( int farmerTotalSeeds ) {
+        this.farmerTotalSeeds = farmerTotalSeeds;
+    }
+
+    public int getFarmerTotalSeeds( ) {
+        return farmerTotalSeeds;
     }
 
     // Farmer's coins
@@ -90,7 +133,6 @@ public class Farmer {
         return farmerLevel;
     }
 
-    
     // Farmer's field
     public void setFarmerField( int[][] farmerField) {
         this.farmerField = farmerField;
@@ -98,6 +140,10 @@ public class Farmer {
 
     public int[][] getFarmerField( ) {
         return this.farmerField;
+    }
+
+    public void setFarmerSeedList( String[] farmerSeedList ) {
+        this.farmerSeedList = farmerSeedList;
     }
     
 
