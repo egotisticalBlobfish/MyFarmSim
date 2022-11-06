@@ -30,7 +30,7 @@ public class Farmer {
         This function display the board
     */
     public void displayFarmField( Farm farm ) {
-        System.out.println(farmerName + "'s Level: " + farm.getFarmLevel());
+        System.out.println(farmerName + "'s Level: " + farmerLevel);
         System.out.println(farmerName + "'s Farm Field" + "\n");
 
         System.out.println("0\t1\t2\t3\t4\t5\t");
@@ -84,8 +84,13 @@ public class Farmer {
         System.out.println("You choose: [" + (market.getChoiceIndex() + 1) + "] " + market.getMarketSeeds()[market.getChoiceIndex()] + "!");
         System.out.println("Price: " + market.getMarketPrices()[market.getChoiceIndex()] + "g\n");
     }
-
-
+ 
+    public void displayFarmWork( Tools tool ) {
+        System.out.println("Equipment: \t" + tool.getToolList()[tool.getToolChoice()-1]);
+        System.out.println("Cost of Usage: \t" + tool.getToolCostUsageList()[tool.getToolChoice()-1]);
+        System.out.println("Experience Gain: \t" + tool.getToolExpGainList()[tool.getToolChoice()-1]);
+        System.out.println("Current Object coins before plowing: " + tool.getToolObjectCoins() + "\n");
+    }
 
     /* Getters and Setters */
     // Farmer's Name
