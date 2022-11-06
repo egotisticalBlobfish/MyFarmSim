@@ -56,7 +56,7 @@ public class Seeds {
 					 for( i=0; i<10; i++ ) {
 				            System.out.print((i + 1) + "\t");
 				            for( j=0; j<5; j++ ) {
-				            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+				            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==21) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 				            		{
 				            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 				            			totalday=totalday+1;//adds the total day
@@ -91,7 +91,7 @@ public class Seeds {
 						 for( i=0; i<10; i++ ) {
 					            System.out.print((i + 1) + "\t");
 					            for( j=0; j<5; j++ ) {
-					            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+					            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==22) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 					            		{
 					            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 					            			totalday=totalday+1;//adds the total day
@@ -125,7 +125,7 @@ public class Seeds {
 					 for( i=0; i<10; i++ ) {
 				            System.out.print((i + 1) + "\t");
 				            for( j=0; j<5; j++ ) {
-				            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+				            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==23) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 				            		{
 				            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 				            			totalday=totalday+1;//adds the total day
@@ -158,7 +158,7 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==24) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
 			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 			            			totalday=totalday+1;//adds the total day
@@ -193,7 +193,7 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==25) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
 			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 			            			totalday=totalday+1;//adds the total day
@@ -227,7 +227,7 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==26) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
 			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 			            			totalday=totalday+1;//adds the total day
@@ -262,7 +262,7 @@ public class Seeds {
 					for( i=0; i<10; i++ ) {
 			            System.out.print((i + 1) + "\t");
 			            for( j=0; j<5; j++ ) {
-			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==20) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
+			            		if (farm.getFarmField()[i][j]==1 && farm.getFarmField()[i][j]==27) // if a tile is unplowed or has seeds for the specific plant,it opens opportunities for 
 			            		{
 			            			seedQuantity[i][j]=seedQuantity[i][j]-1;//decreases the specific seed 
 			            			totalday=totalday+1;//adds the total day
