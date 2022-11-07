@@ -1,3 +1,11 @@
+/*Description: the public class Market offers the seed buying in the market
+ * Parameters
+ *nTotalGoldCoins-the integer of total gold coins the farmer has
+ *nSeedPerCrop- the integer array for the seed for a specific crop
+ *nTotalNumSeeds-the integer of the total seeds accumulated
+ * marketSeeds- The string array for the label of the seeds
+ * marketPrices-The integer array of the specified market prices for the seeds
+ * choiceIndex- the integer of the user input choice */
 
 
 public class Market {
