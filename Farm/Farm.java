@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Farm {
     String[] farmSeedList;
@@ -10,12 +11,17 @@ public class Farm {
 
     int[][] farmWateredCropsField;
     int[][] farmFertilizedCropsField;
+
+    Random randGen = new Random();
+    int farmNumProducts;
+    int[] farmHarvestedCropList;      // stores the number of crops harvest per crop
     int i, j;
 
 
     /*
         This function identifies if the one of the tiles in the field is plowed
      */
+    // Plowing
     public void farmPlowFieldTile( int nRow, int nCol ) {
         if(farmField[nRow-1][nCol-1] == 0) {
             farmField[nRow-1][nCol-1] = 1;  // (== 1) -- means the tile is done plowing
@@ -31,15 +37,7 @@ public class Farm {
         }
     }
 
-    /*
-    public void farmWaterFieldTile( int nRow, int nCol ) {
-        if(farmField[nRow-1][nCol-1] >= 20 && farmField[nRow-1][nCol-1] <= 27) {
-
-        }
-    }
-    */
-
-    
+    // Planting
     public void farmPlantFieldTile( int nRow, int nCol, int choiceIndex ) {
         if(farmField[nRow-1][nCol-1] == 1) {    // (== 1) -- means the tile is plowed
             System.out.println("This tile is PLOWED: [" + (nRow) + "][" + (nCol)  + "]");
@@ -90,9 +88,10 @@ public class Farm {
         }
     }
 
+    // Watering
     public void farmWaterFieldTile( int nRow, int nCol, int nSeedIndex ) {
         System.out.println("A seed is planted here!");
-        System.out.println("Planted Seed: " + farmSeedList[nSeedIndex]);
+        System.out.println("Planted Seed: " + farmSeedList[nSeedIndex-1] + "\n");
 
         switch( nSeedIndex - 1) {
             case 0:     farmField[nRow-1][nCol-1] = 30; // Turnip
@@ -114,15 +113,54 @@ public class Farm {
         }
     }
 
-    /*
+    // Fertilizing
     public void farmFertilizeFieldTile( ) {
         System.out.println("A seed is planted here!");
     }
-    */
+    
+    // Harvesting
+    public void farmHarvestFieldTile( int nSellIndex ) {
+        System.out.println("A mature plant is ready to harvest here!");
+        System.out.println("Mature crop: " + farmSeedList[nSellIndex]);
 
+        switch( nSellIndex ) {
+            case 0:     farmNumProducts = (1 + randGen.nextInt(2));
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Turnip
+                        break;
+            case 1:     farmNumProducts = (1 + randGen.nextInt(2));
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Carrot
+                        break; 
+            case 2:     farmNumProducts = (1 + randGen.nextInt(10));
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Potato
+                        break;
+            case 3:     farmNumProducts = 1;
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Rose
+                        break;
+            case 4:     farmNumProducts = 1;
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Tulip
+                        break;
+            case 5:     farmNumProducts = 1;
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Sunflower
+                        break;
+            case 6:     farmNumProducts = (5 + randGen.nextInt(15));           // tentative
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Mango
+                        break;
+            case 7:     farmNumProducts = (10 + randGen.nextInt(15));            // tentative
+                        farmHarvestedCropList[nSellIndex] = farmHarvestedCropList[nSellIndex] + farmNumProducts; // Apple
+                        break;
+        }
 
+        System.out.println("No. of Produced Crops: " + farmNumProducts);
+    }
+
+    // EXP in Harvesting
     public void computeHarvestingExperienceGain( int choiceIndex ) {
-        farmExperience = farmExperience + farmHarvestingExpGain[choiceIndex-1];
+        farmExperience = farmExperience + farmHarvestingExpGain[choiceIndex];
+    }
+
+    // Set the harvested tile into a unplowed tile
+    public void convertHarvestedTileToUnplowedTile( int nRow, int nCol ) {
+        farmField[nRow-1][nCol-1] = 0;
     }
     
 
@@ -172,5 +210,13 @@ public class Farm {
 
     public double[] getFarmHarvestingExpGain( ) {
         return farmHarvestingExpGain;
+    }
+
+    public void setFarmHarvestedCropList( int[] farmHarvestCropList ) {
+        this.farmHarvestedCropList = farmHarvestCropList;
+    }
+
+    public int[] getFarmHarvestedCropList( ) {
+        return farmHarvestedCropList;
     }
 }
