@@ -67,12 +67,12 @@ public class Driver {
 	    int[][] arrSeedsDaysGrowth = new int[10][5];				// Stores the days counts of a crop before the harvest
         char[][] arrSeedCropStatus = new char[10][5];
 
-        double[] arrHarvestCropsList = new double[8];
+        int[] arrHarvestedCropsList = new int[8];                   // number of products harvested per crop
 
 
         for( k=0; k<8; k++ ) {
             arrSeedsPerCrop[k] = 0;
-            arrHarvestCropsList[k] = 0;
+            arrHarvestedCropsList[k] = 0;
         }
 
         for( i=9; i>=0; i-- ) {
@@ -91,12 +91,12 @@ public class Driver {
 
         String[] arrToolList = {"Plow", "Plant", "Watering Can", "Fertilizer", "Harvest", "Pickaxe", "Shovel"};
         int[] arrToolCostUsage = {0, 0, 0, 10, 0, 50, 7};
-        double[] arrToolExpGain = {0.5, 0.0, 0.5, 4.0, 0.0, 15.0, 2.0};
+        double[] arrToolExpGain = {0.5d, 0.0d, 0.5d, 4.0d, 0.0d, 15.0d, 2.0d};
 
-        double[] arrHarvestingExpGain = {5.0, 7.5, 12.5, 2.5, 5.0, 7.5, 25.0, 25.0};
+        double[] arrHarvestingExpGain = {5.0d, 7.5d, 12.5d, 2.5d, 5.0d, 7.5d, 25.0d, 25.0d};
         int[] arrHarvestTime = {2, 3, 5, 1, 2, 3, 10, 10};
 
-        double[] arrSellingPrice = {6, 9, 3, 5, 9, 19, 8, 5};
+        int[] arrSellingPrice = {6, 9, 3, 5, 9, 19, 8, 5};
         
 
 
@@ -110,7 +110,8 @@ public class Driver {
 
         int nChoiceMarket;
         int nChoiceSeed;
-        int nChoiceSell;
+        //int nChoiceSell;
+        int nChoiceCrop;
 
         int nPlowFieldRow;
         int nPlowFieldCol;
@@ -124,7 +125,10 @@ public class Driver {
         int nWaterFieldRow;
         int nWaterFieldCol;
 
-
+        int nCropExist;
+        int nCropType;
+        int nHarvestFieldRow;
+        int nHarvestFieldCol;
 
         int nBuySeeds;
         sc = new Scanner(System.in);     //open scanner function
@@ -151,6 +155,7 @@ public class Driver {
 
         // Farm
         Farm farmerField = new Farm( );
+        farmerField.setFarmHarvestedCropList(arrHarvestedCropsList);
         farmerField.setFarmField(arrFarmField);
         farmerField.setFarmHarvestingExpGain(arrHarvestingExpGain);
 
@@ -158,6 +163,7 @@ public class Driver {
         Market market = new Market( );
         market.setMarketSeeds(arrSeedList);
         market.setMarketPrices(arrPriceList);
+        market.setMarketCropSellingPrice(arrSellingPrice);
 
         // Tool
         Tools tool = new Tools( );
@@ -362,6 +368,9 @@ public class Driver {
                                                             nSeedType = seed.seedIdentifyCrop(farmerUser, nWaterFieldRow, nWaterFieldCol);
                                                             farmerField.farmWaterFieldTile(nWaterFieldRow, nWaterFieldCol, nSeedExist);
 
+                                                            // Set the new field with watered field
+                                                            arrFarmField = farmerField.getFarmField();
+
 
                                                             // Set the farmer's experience and level
                                                             dFarmerExperience = farmerUser.getFarmerExperience();
@@ -370,32 +379,35 @@ public class Driver {
                                                             
 
                                                             // Set the values
-                                                            arrSeedsWaterCount = seed.getSeedsWaterCount();     // water count only changes in seed class
-                                                            seed.setSeedsWaterCount(arrSeedsWaterCount);
-                                                            seed.setSeedsDayGrowth(arrSeedsDaysGrowth);         // seed growth only changes in driver class
+                                                            arrSeedsWaterCount = seed.getSeedsWaterCount();     // get the water count
+                                                            seed.setSeedsWaterCount(arrSeedsWaterCount);        // set the water count in seed class
+                                                            seed.setSeedsDayGrowth(arrSeedsDaysGrowth);         // set the days growth count in seed class || seed growth only changes in driver class
 
                                                             // Call the seed class to water the seed in a tile
-                                                            seed.seedsWatering(nWaterFieldRow, nWaterFieldCol);
-                                                            seed.seedIdentifyCropStatus(farmerUser, nWaterFieldRow, nWaterFieldCol, nSeedType);
+                                                            seed.seedsWatering(nWaterFieldRow, nWaterFieldCol);             // water count only changes in seed class
+                                                            farmerField.setFarmHarvestedCropList(arrHarvestedCropsList);    // set the list of harvest crops
+                                                            seed.seedIdentifyCropStatus(farmerUser, farmerField, nWaterFieldRow, nWaterFieldCol, nSeedType);    // see the crop status if good to harvest
+                                                            arrSeedCropStatus = seed.getSeedsCropStatus();                  // get the status, to be used in the harvesting
+                                                            farmerUser.setFarmerSeedCropStatus(arrSeedCropStatus);          // save the new crop status
 
                                                             // insert here
-                                                            tool.toolComputeFarmerExperience();
-                                                            tool.toolComputeFarmerObjectCoins();
-                                                            farmerUser.computeFarmerLevel();
+                                                            tool.toolComputeFarmerExperience();                             // compute the exp gain after watering
+                                                            tool.toolComputeFarmerObjectCoins();                            // compute the coins after watering
+                                                            farmerUser.computeFarmerLevel();                                // compute the level
 
-                                                            dFarmerExperience = tool.getToolFarmerExperience();   // Get the new farmer's level after watering
-                                                            nFarmerLevel = farmerUser.getFarmerLevel();
-                                                            nObjectCoins = tool.getToolObjectCoins();
-                                                            arrFarmField = farmerField.getFarmField();  // Get the new farmer's field after watering
+                                                            dFarmerExperience = tool.getToolFarmerExperience();     // Get the new farmer's exp after watering
+                                                            nFarmerLevel = farmerUser.getFarmerLevel();             // get the new farmer's level
+                                                            nObjectCoins = tool.getToolObjectCoins();               // get the updated coins
+                                                            arrFarmField = farmerField.getFarmField();              // Get the new farmer's field after watering
 
                                                             // Set the new updated values
-                                                            farmerUser.setFarmerExperience(dFarmerExperience);    // Set the new farmer's level after plowing
-                                                            farmerUser.setFarmerLevel(nFarmerLevel);
-                                                            farmerUser.setFarmerCoins(nObjectCoins);
-                                                            farmerUser.setFarmerField(arrFarmField);    // Set the new farmer's level after plowing
+                                                            farmerUser.setFarmerExperience(dFarmerExperience);      // Set the new farmer's level after plowing
+                                                            farmerUser.setFarmerLevel(nFarmerLevel);                // Set the level
+                                                            farmerUser.setFarmerCoins(nObjectCoins);                // set the coins
+                                                            farmerUser.setFarmerField(arrFarmField);                // Set the new farmer's level after plowing
                                                     
                                                             // Display farmer's updated profile
-                                                            farmerUser.displayFarmField(farmerField);
+                                                            farmerUser.displayFarmField(farmerField);               // display
                                                         }
                                                         else {
                                                             System.out.println("Back to Main Menu\n");
@@ -411,8 +423,79 @@ public class Driver {
                                                     // call the Seeds.java class
                                                     break;
                                         case 5:     System.out.println("You choose: [5] Harvest a crop in a tile");
+                                                    
+                                                    // Display the field
+                                                    farmerUser.displayFarmField(farmerField);
+                                                    System.out.println("");
 
-                                                    // call the Seeds.java class
+                                                    arrSeedCropStatus = farmerUser.getFarmerSeedCropStatus();
+                                                    seed.setSeedsCropStatus(arrSeedCropStatus);
+                                                    
+                                                    // display the available tile of crops to sell
+                                                    farmerUser.displayHarvest(seed);
+
+                                                    // Ask the user which til to harvest
+                                                    do{ 
+                                                        System.out.println("Choose a tile with crop to harvest: ");
+                                                        System.out.println("Row (1 to 10): ");      // get the row
+                                                        nHarvestFieldRow = sc.nextInt();                   
+                                                        System.out.println("Column (1 to 5): ");    // get the column
+                                                        nHarvestFieldCol = sc.nextInt();
+                                                    }while(nHarvestFieldRow <= 0 || nHarvestFieldRow >= 11 || nHarvestFieldCol <= 0 || nHarvestFieldCol >= 6);
+                                                    
+
+                                                    // Set the farmer's field
+                                                    arrFarmField = farmerUser.getFarmerField();
+                                                    seed.setSeedsFarmField(arrFarmField);
+
+                                                    // Call the seed class to identify if there's a seed planted
+                                                    nCropExist = seed.checkSeedExist(nHarvestFieldRow, nHarvestFieldCol);
+
+                                                    if( nCropExist == 1) {
+                                                        // Call the seed class to identify what crop is it
+                                                        nCropType = seed.seedIdentifyCrop(farmerUser, nHarvestFieldRow, nHarvestFieldCol);
+
+                                                        // Identify if it is good to harvest
+                                                        seed.seedIdentifyCropStatus(farmerUser, farmerField, nHarvestFieldRow, nHarvestFieldCol, nCropType);
+
+                                                        // Get the updated crop status
+                                                        arrSeedCropStatus[nHarvestFieldRow-1][nHarvestFieldCol-1] = seed.getSeedsCropStatus()[nHarvestFieldRow-1][nHarvestFieldCol-1];
+
+                                                        if(arrSeedCropStatus[nHarvestFieldRow-1][nHarvestFieldCol-1] == 'H') {  // crop is mature
+                                                            // get the number of produce crops
+                                                            farmerField.farmHarvestFieldTile(nCropType);
+
+                                                            // get the updated list of harvested crops
+                                                            arrHarvestedCropsList = farmerField.getFarmHarvestedCropList();
+
+
+                                                            System.out.println(arrHarvestedCropsList[nCropType] + "meet the requirements to harvest!\n");
+                                                            // Update the experience
+                                                            dFarmerExperience = farmerUser.getFarmerExperience();
+                                                            farmerField.computeHarvestingExperienceGain(nCropType);
+                                                            dFarmerExperience = farmerField.getFarmExperience();
+                                                            farmerUser.setFarmerExperience(dFarmerExperience);
+
+                                                            // Update the Level
+                                                            farmerUser.setFarmerLevel(nFarmerLevel);
+                                                            farmerUser.computeFarmerLevel();
+                                                            nFarmerLevel = farmerUser.getFarmerLevel();
+
+                                                            // Reset to unplowed tile
+                                                            farmerField.convertHarvestedTileToUnplowedTile(nHarvestFieldRow, nHarvestFieldCol);
+                                                            arrFarmField = farmerField.getFarmField();
+                                                            farmerUser.setFarmerField(arrFarmField);
+
+                                                        }
+                                                        else {
+                                                            System.out.println(arrHarvestedCropsList[nCropType-1] + "didn't meet the requirements before harvesting!\n");
+                                                        }
+                                                        
+                                                    }
+                                                    else {
+                                                        System.out.println("No crop is planted here!\n");
+                                                    }
+                                                    
                                                     break;
                                         case 6:     System.out.println("You choose: [6] Pickaxe a rock in a tile");
                                                     // Call the Farm.java class
@@ -461,7 +544,7 @@ public class Driver {
                                         market.setChoiceIndex(nChoiceSeed - 1);
 
                                         farmerUser.displayMarketTransaction(market);
-                                        market.transactionBuySeeds( arrSeedList, arrPriceList, nChoiceSeed - 1, nBuySeeds);
+                                        market.transactionBuySeeds( nChoiceSeed - 1, nBuySeeds);
                                         
                                         nObjectCoins = market.getNTotalGoldCoins();
                                         farmerUser.setFarmerCoins(nObjectCoins);
@@ -477,11 +560,49 @@ public class Driver {
                                         System.out.println("Current ObjectCoins: " + nObjectCoins + "g");
                                         System.out.println("Current no. of seeds: " + nTotalSeeds);
                                     }
-                                    else if(nChoiceMarket == 2) {
+                                    else if(nChoiceMarket == 2) {       // Sell Crops on Market
                                         System.out.println("You choose: [2] Sell Crops");
-                                        nChoiceSell = 0;
+                                        nObjectCoins = farmerUser.getFarmerCoins();
+                                        market.setNTotalGoldCoins(nObjectCoins);
+                                        market.setMarketPrices(arrSellingPrice);
 
-                                        market.transactionSellCrops(arrSeedList, arrPriceList, nChoiceSell);
+                                        // Get the updated values
+                                        arrHarvestedCropsList = farmerField.getFarmHarvestedCropList();
+                                        arrSeedCropStatus = farmerUser.getFarmerSeedCropStatus();
+
+
+                                        do {
+                                            System.out.println("\nChoose a crop to sell: ");
+
+                                            // Display seeds and prices
+                                            for(i=0; i<8; i++) {
+                                                System.out.println("\t[" + (i + 1) + "]" + arrSeedList[i] + "\tPrice: " + arrSellingPrice[i] + "g" + "\tPieces: " + arrHarvestedCropsList[i]);
+                                            }
+                                            
+                                            nChoiceCrop = sc.nextInt();
+
+                                        } while(nChoiceCrop <= 0 || nChoiceCrop >= 9);
+
+                                        // set the market choice
+                                        market.setChoiceIndex(nChoiceCrop-1);
+
+                                        // call the sell transaction flag
+                                        farmerUser.displayMarketSellTransaction(market);
+
+                                        
+                                        // Compute sales
+                                        market.transactionSellCrops(nChoiceCrop, arrHarvestedCropsList[nChoiceCrop-1]);
+
+                                        arrHarvestedCropsList = market.getNSeedPerCrop();
+                                        nObjectCoins = market.getNTotalGoldCoins();
+
+                                        farmerField.setFarmHarvestedCropList(arrHarvestedCropsList);
+                                        farmerUser.setFarmerCoins(nObjectCoins);
+
+                                        System.out.println("Transaction: Selling is done!\n");
+
+                                        farmerUser.displayFarmerProfileStatus();
+
                                     }
                                     else if(nChoiceMarket == 0) {
                                         System.out.println("You choose: [0] Back to Main Menu");
