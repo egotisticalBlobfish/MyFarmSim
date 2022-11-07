@@ -4,6 +4,7 @@
  * seedsFertilizing			-- put a fertilizer on a tile
  * seedIdentifyStatus		-- checks the status of a plant
  */
+import java.util.Random;
 
 public class Seeds {
 	// Values are from driver class
@@ -17,6 +18,9 @@ public class Seeds {
 	//private int[] seedsWaterNeedsBonusLimitMax = { 2, 2, 4, 2, 3, 3, 7, 7};
 	//private int[] seedsFertilizerNeedsBonusLimitMax = { 1, 1, 2, 1, 1, 2, 4, 5};
 
+	//Minimum and Maximum of Harvest
+	private int [] SeedsHarvestMin= {1,1,1,1,1,1,5,10};
+	pribate int [] SeedsHarvestMax={2,2,10,0,0,0,15,15};
 	// Changes
 	private int[][] seedsFarmField;						// Get the updated farm field -- to store the water and fertilizer amount
 	private int[][] seedsWaterCount;					// Initialized in Driver class as = 0 | Stores the amount how many times a crops was watered
@@ -26,6 +30,16 @@ public class Seeds {
 
 	
 	/* Methods */
+	
+	public static int randHarvestPlant (int[] min, int[] max,int n) {
+	Random rand = new Random();
+	int randomNum;
+		do{
+		 randomNum=rand.nextInt((max[n]-min[n])+1);
+		   }while (randomNum==0);
+	
+	    return randomNum;
+	}
 	public void resetWaterFertilizerGrowthCount( int nRow, int nCol ) {
 		seedsWaterCount[nRow][nCol] = 0;
 		seedsFertilizerCount[nRow][nCol] = 0;
