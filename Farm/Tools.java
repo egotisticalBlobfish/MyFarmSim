@@ -4,48 +4,18 @@ public class Tools {
     double[] toolExpGainList;
     int toolChoice;
     int toolFarmerObjectCoins;
-    double toolFarmerLevel;
+    double toolFarmerExperience;
 
     
-    public void toolComputeFarmerLevel( ) {
-        switch( toolChoice - 1 ) {
-            case 0:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-            case 1:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-            case 2:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-            case 3:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-            case 4:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-            case 5:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-            case 6:     toolFarmerLevel = toolFarmerLevel + toolExpGainList[toolChoice-1];
-                        break;
-        }
+    public void toolComputeFarmerExperience( ) {
+        toolFarmerExperience = toolFarmerExperience + toolExpGainList[toolChoice-1];
     }
 
     public void toolComputeFarmerObjectCoins( ) {
-        switch( toolChoice - 1 ) {
-            case 0:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-            case 1:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-            case 2:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-            case 3:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-            case 4:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-            case 5:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-            case 6:     toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
-                        break;
-        }
+        toolFarmerObjectCoins = toolFarmerObjectCoins - toolCostUsageList[toolChoice-1];
     }
     
-
+    /* Getters and Setters */
     public void setToolList( String[] toolList ) {
         this.toolList = toolList;
     }
@@ -86,11 +56,11 @@ public class Tools {
         return toolFarmerObjectCoins;
     }
 
-    public void setToolFarmerLevel( double toolFarmerLevel ) {
-        this.toolFarmerLevel = toolFarmerLevel;
+    public void setToolFarmerExperience( double toolFarmerExperience ) {
+        this.toolFarmerExperience = toolFarmerExperience;
     }
 
-    public double getToolFarmerLevel( ) {
-        return toolFarmerLevel;
+    public double getToolFarmerExperience( ) {
+        return toolFarmerExperience;
     }
 }
