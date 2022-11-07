@@ -164,8 +164,6 @@ public class Farm {
     }
     
 
-    
-
     /*Getters and Setters */
     public void setFarmSeedList( String[] farmSeedList ) {
         this.farmSeedList = farmSeedList;
