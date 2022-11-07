@@ -10,6 +10,7 @@
 * farmerField-the double array of the  field of the farm
 * farmerSeedList-the string array for the list of seeds
  */
+
 public class Farmer {
     private String farmerName;
     private int[] farmerSeedsPerCrop;
@@ -19,6 +20,7 @@ public class Farmer {
     private int farmerLevel;
     private int[][] farmerField;
     private String[] farmerSeedList;
+    private char[][] farmerSeedCropStatus;
     int i, j, k;
 
     int cropType;
@@ -153,42 +155,18 @@ public class Farmer {
             System.out.println();
         }
     }
-
-    /*
-    public void displayFarmFieldStatus( Seeds seed ) {
-        System.out.println("Crop Status Legends: ");
-		System.out.println("\t[G] - Growing");
-		System.out.println("\t[H] - Time to Harvest");
-		System.out.println("\t[W] - Withered");
-
-        System.out.println(farmerName + "'s Farm Field Status" + "\n");
-        System.out.println("0\t1\t2\t3\t4\t5\t");
-
-        for( i=0; i<10; i++ ) {
-            System.out.print((i + 1) + "\t");
-            for( j=0; j<5; j++ ) {
-                if(seed.getSeedsCropStatus()[i][j] == 'x') {
-                    System.out.println("x \t");
-                }
-                else if(seed.getSeedsCropStatus()[i][j] == 'G'){
-                    System.out.println("G \t");
-                }
-                else if(seed.getSeedsCropStatus()[i][j] == 'H'){
-                    System.out.println("H \t");
-                }
-                else if(seed.getSeedsCropStatus()[i][j] == 'T'){
-                    System.out.println("T \t");
-                }
-            }
-            System.out.println();
-        }
-    }
-    */
+    
 
     public void displayMarketTransaction( Market market ) {
         System.out.println(farmerName + "'s ObjectCoins: " + farmerCoins);
         System.out.println("You choose: [" + (market.getChoiceIndex() + 1) + "] " + market.getMarketSeeds()[market.getChoiceIndex()] + "!");
         System.out.println("Price: " + market.getMarketPrices()[market.getChoiceIndex()] + "g\n");
+    }
+
+    public void displayMarketSellTransaction( Market market ) {
+        System.out.println(farmerName + "'s ObjectCoins: " + farmerCoins);
+        System.out.println("You choose: [" + (market.getChoiceIndex() + 1) + "] " + market.getMarketSeeds()[market.getChoiceIndex()] + "!");
+        System.out.println("Price: " + market.getMarketCropSellingPrice()[market.getChoiceIndex()] + "g\n");
     }
  
     public void displayFarmWork( Tools tool ) {
@@ -196,6 +174,27 @@ public class Farmer {
         System.out.println("Cost of Usage: \t" + tool.getToolCostUsageList()[tool.getToolChoice()-1]);
         System.out.println("Experience Gain: \t" + tool.getToolExpGainList()[tool.getToolChoice()-1]);
         System.out.println("Current Object coins before work: " + tool.getToolObjectCoins() + "\n");
+    }
+
+
+    public void displayHarvest( Seeds seed ) {
+        System.out.println("Available Products to sell: ");
+
+        System.out.println("0\t1\t2\t3\t4\t5\t");
+
+        for( i=0; i<10; i++ ) {
+            System.out.print((i + 1) + "\t");
+            for( j=0; j<5; j++ ) {
+                if(seed.getSeedsCropStatus()[i][j] == 'H') {    // Tile that is ready to harvest
+                    System.out.println("'H' \t");
+                }
+                else {      // not reday to harvest
+                    System.out.println("-o- \t");
+                }
+            }
+            System.out.println();
+        }
+        
     }
 
     
@@ -272,6 +271,12 @@ public class Farmer {
         return farmerSeedList;
     }
 
-    
+    public void setFarmerSeedCropStatus( char[][] farmerSeedCropStatus ) {
+        this.farmerSeedCropStatus = farmerSeedCropStatus;
+    }
+
+    public char[][] getFarmerSeedCropStatus( ) {
+        return farmerSeedCropStatus;
+    }
 
 }
