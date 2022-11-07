@@ -5,7 +5,11 @@ public class Farm {
     int farmTotalSeeds;
     int farmObjectCoins;
     int[][] farmField;
-    double farmLevel;
+    double farmExperience;
+    double[] farmHarvestingExpGain;
+
+    int[][] farmWateredCropsField;
+    int[][] farmFertilizedCropsField;
     int i, j;
 
 
@@ -27,6 +31,14 @@ public class Farm {
         }
     }
 
+    /*
+    public void farmWaterFieldTile( int nRow, int nCol ) {
+        if(farmField[nRow-1][nCol-1] >= 20 && farmField[nRow-1][nCol-1] <= 27) {
+
+        }
+    }
+    */
+
     
     public void farmPlantFieldTile( int nRow, int nCol, int choiceIndex ) {
         if(farmField[nRow-1][nCol-1] == 1) {    // (== 1) -- means the tile is plowed
@@ -34,16 +46,16 @@ public class Farm {
             System.out.println("Ready for planting!");
 
             if(farmTotalSeeds != 0) {
+                System.out.println("Seed [" + choiceIndex + "]: " + farmSeedList[choiceIndex - 1] + "\tNo. of seed: " + farmSeedsPerCrop[choiceIndex - 1]);
 
                 if(farmSeedsPerCrop[choiceIndex - 1] == 0) {
-                    System.out.println("Seed [" + choiceIndex + "]: " + farmSeedList[choiceIndex - 1] + "\tNo. of seed: " + farmSeedsPerCrop[choiceIndex - 1]);
                     System.out.println("You have insufficient number of seeds!");
                 }
                 else {
-                    System.out.println("Seed [" + choiceIndex + "]: " + farmSeedList[choiceIndex - 1] + "\tNo. of seed: " + farmSeedsPerCrop[choiceIndex - 1]);
                     System.out.println("You have sufficient number of seeds!");
 
-                    farmSeedsPerCrop[choiceIndex - 1] = farmSeedsPerCrop[choiceIndex - 1] - 1;
+                    farmSeedsPerCrop[choiceIndex - 1] = farmSeedsPerCrop[choiceIndex - 1] - 1;  // remove a seed
+                    farmTotalSeeds = farmTotalSeeds - 1;
                     System.out.println("You planted a " + farmSeedList[choiceIndex - 1] + "!");
                     System.out.println("Remaining " + farmSeedList[choiceIndex - 1] + " seed: " + farmSeedsPerCrop[choiceIndex - 1]);
 
@@ -76,6 +88,41 @@ public class Farm {
         else {  // Tile unplowed
             System.out.println("This tile is NOT READY for planting: [" + nRow + "][" + nCol + "]\n");
         }
+    }
+
+    public void farmWaterFieldTile( int nRow, int nCol, int nSeedIndex ) {
+        System.out.println("A seed is planted here!");
+        System.out.println("Planted Seed: " + farmSeedList[nSeedIndex]);
+
+        switch( nSeedIndex - 1) {
+            case 0:     farmField[nRow-1][nCol-1] = 30; // Turnip
+                        break;
+            case 1:     farmField[nRow-1][nCol-1] = 31; // Carrot
+                        break; 
+            case 2:     farmField[nRow-1][nCol-1] = 32; // Potato
+                        break;
+            case 3:     farmField[nRow-1][nCol-1] = 33; // Rose
+                        break;
+            case 4:     farmField[nRow-1][nCol-1] = 34; // Tulip
+                        break;
+            case 5:     farmField[nRow-1][nCol-1] = 35; // Sunflower
+                        break;
+            case 6:     farmField[nRow-1][nCol-1] = 36; // Mango
+                        break;
+            case 7:     farmField[nRow-1][nCol-1] = 37; // Apple
+                        break;
+        }
+    }
+
+    /*
+    public void farmFertilizeFieldTile( ) {
+        System.out.println("A seed is planted here!");
+    }
+    */
+
+
+    public void computeHarvestingExperienceGain( int choiceIndex ) {
+        farmExperience = farmExperience + farmHarvestingExpGain[choiceIndex-1];
     }
     
 
@@ -111,13 +158,19 @@ public class Farm {
         return farmField;
     }
 
-    public void setFarmLevel( double farmLevel ) {
-        this.farmLevel = farmLevel;
+    public void setFarmExperience( double farmExperience ) {
+        this.farmExperience = farmExperience;
     }
 
-    public double getFarmLevel( ) {
-        return farmLevel;
+    public double getFarmExperience( ) {
+        return farmExperience;
     }
 
-   
+    public void setFarmHarvestingExpGain( double[] farmHarvestingExpGain ) {
+        this.farmHarvestingExpGain = farmHarvestingExpGain;
+    }
+
+    public double[] getFarmHarvestingExpGain( ) {
+        return farmHarvestingExpGain;
+    }
 }
