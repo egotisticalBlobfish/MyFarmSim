@@ -34,11 +34,18 @@ public class Seeds {
 	public static int randHarvestPlant (int[] min, int[] max,int n) {
 	Random rand = new Random();
 	int randomNum;
-		do{
+	  do{
+		if (n==3||n==4||n==5){
+		   randomNum=1;
+		 }
+		else{
 		 randomNum=rand.nextInt((max[n]-min[n])+1);
-		   }while (randomNum==0);
+		}
+		
+	     }while (randomNum==0);
 	
 	    return randomNum;
+	
 	}
 	public void resetWaterFertilizerGrowthCount( int nRow, int nCol ) {
 		seedsWaterCount[nRow][nCol] = 0;
