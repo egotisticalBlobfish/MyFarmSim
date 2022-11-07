@@ -1,3 +1,15 @@
+/*Description: the public class farmer provides the computation of the farmer level,
+ * display the farmer status,and the farm display
+ Parameters:
+*farmerName-is the string name for the farmer 
+* farmerSeedsPerCrop- the integer array for the specific seed
+* farmerTotalSeeds- the integer of total seeds equipped by the farmer
+* farmerCoins-the integer of the total coins the farmer has 
+* farmerExperience-the double of the experience points of the farmer
+* farmerLevel-the integer of the level of the farmer
+* farmerField-the double array of the  field of the farm
+* farmerSeedList-the string array for the list of seeds
+ */
 public class Farmer {
     private String farmerName;
     private int[] farmerSeedsPerCrop;
