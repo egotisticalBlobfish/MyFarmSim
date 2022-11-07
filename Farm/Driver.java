@@ -11,13 +11,16 @@ plagiarized the work of other students and/or persons.
 
 import java.util.Scanner;
 
-
+/*The class driver offers User Interface and the collaboration of classes which includes the display header, the farmer's actions, the tools actions
+ and the market*/
 public class Driver {
     
+	/*displayHeader() is a void function that displays the header of the program*/
     public static void displayHeader( ) {
         System.out.println("Welcome to the game: My Farm!");
     }
 
+	/*displayWorkFlag() is a void function that displays the main user interface*/
     public static void displayWorkFlag( ) {
         // Ask user what to do:
         System.out.println("\nMain Menu: ");
@@ -30,6 +33,7 @@ public class Driver {
         System.out.println("\n\t[PRESS ANY KEY] Exit the Game");
     }
 
+	/*displayFarmingFlag() is a void function that displays other options if the user chose [3] Work on Farm*/
     public static void displayFarmingFlag() {
         //Ask user what to do in farm:
         System.out.println("\nWhat to do in Farm Field: ");
@@ -44,6 +48,7 @@ public class Driver {
         
     }
 
+      /*displayFarmingFlag() is a void function that displays other options if the user chose [3] Work on Farm*/
     public static void displayMarketFlag( ) {
         System.out.println("\nMarket Transaction: ");
         System.out.println("\t[1] Buy Seeds");
