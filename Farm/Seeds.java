@@ -4,11 +4,23 @@
  * seedsFertilizing			-- put a fertilizer on a tile
  * seedIdentifyStatus		-- checks the status of a plant
  */
-import java.util.Random;
+
+/*
+ * checkSeedExist			-- check if there's a plant or seed on a tile
+ * seedsWatering			-- water the plant on a tile
+ * seedsFertilizing			-- put a fertilizer on a tile
+ * seedIdentifyStatus		-- checks the status of a plant
+ */
+
+ //import java.util.Random;
 
 public class Seeds {
+	//Random randGen = new Random();
+	//int seedsNumProducts;
+
 	// Values are from driver class
 	private int[] seedsCropHarvestTime;					// Array for the harvest time for the plant
+
 
 	// Must met this amount every day depending on a crop type
 	private int[] seedsWaterNeedsMin = {1, 1, 3, 1, 2, 3, 10, 10};
@@ -18,9 +30,6 @@ public class Seeds {
 	//private int[] seedsWaterNeedsBonusLimitMax = { 2, 2, 4, 2, 3, 3, 7, 7};
 	//private int[] seedsFertilizerNeedsBonusLimitMax = { 1, 1, 2, 1, 1, 2, 4, 5};
 
-	//Minimum and Maximum of Harvest
-	private int [] SeedsHarvestMin= {1,1,1,1,1,1,5,10};
-	pribate int [] SeedsHarvestMax={2,2,10,0,0,0,15,15};
 	// Changes
 	private int[][] seedsFarmField;						// Get the updated farm field -- to store the water and fertilizer amount
 	private int[][] seedsWaterCount;					// Initialized in Driver class as = 0 | Stores the amount how many times a crops was watered
@@ -30,23 +39,6 @@ public class Seeds {
 
 	
 	/* Methods */
-	
-	public static int randHarvestPlant (int[] min, int[] max,int n) {
-	Random rand = new Random();
-	int randomNum;
-	  do{
-		if (n==3||n==4||n==5){
-		   randomNum=1;
-		 }
-		else{
-		 randomNum=rand.nextInt((max[n]-min[n])+1);
-		}
-		
-	     }while (randomNum==0);
-	
-	    return randomNum;
-	
-	}
 	public void resetWaterFertilizerGrowthCount( int nRow, int nCol ) {
 		seedsWaterCount[nRow][nCol] = 0;
 		seedsFertilizerCount[nRow][nCol] = 0;
@@ -56,7 +48,7 @@ public class Seeds {
 	public int checkSeedExist( int nRow, int nCol ) {
 		int seedExist;
 
-		if(seedsFarmField[nRow][nCol] <= 19 &&  seedsFarmField[nRow][nCol] >= 28) {
+		if(seedsFarmField[nRow][nCol] <= 19 &&  seedsFarmField[nRow][nCol] >= 38) {
 			seedExist = 0;	// no seed exist in a tile
 		}
 		else {
@@ -75,7 +67,7 @@ public class Seeds {
 		return nIndexCropType;
 	}
 
-	public void seedIdentifyCropStatus( Farmer farmerUSer, int nRow, int nCol, int nSeedType ) {
+	public void seedIdentifyCropStatus( Farmer farmerUSer, Farm farmerField, int nRow, int nCol, int nSeedType ) {
 
 		System.out.println("Crop Status Legends: ");
 		System.out.println("\t[G] - Growing");
@@ -83,8 +75,9 @@ public class Seeds {
 		System.out.println("\t[W] - Withered");
 
 		if(seedsDaysGrowth[nRow-1][nCol-1] < seedsCropHarvestTime[nSeedType]) {		// Growing
-			if((seedsWaterCount[nRow-1][nCol-1] >= (seedsWaterNeedsMin[nSeedType] - 1)) || (seedsFertilizerCount[nRow-1][nCol-1] >= (seedsFertlizerNeedsMin[nSeedType] - 1))) {
+			if((seedsWaterCount[nRow-1][nCol-1] >= (seedsWaterNeedsMin[nSeedType])) || (seedsFertilizerCount[nRow-1][nCol-1] >= (seedsFertlizerNeedsMin[nSeedType] - 1))) {
 				seedsCropStatus[nRow-1][nCol-1] = 'G';
+
 				System.out.println("Plant: " + farmerUSer.getFarmerSeedList()[nSeedType]);
 				System.out.println("Status: Growing");
 				System.out.println("The plant is still growing keep up the good work!\n");
@@ -93,6 +86,7 @@ public class Seeds {
 		else if(seedsDaysGrowth[nRow-1][nCol-1] == seedsCropHarvestTime[nSeedType]){	// Time to harvest
 			if((seedsWaterCount[nRow-1][nCol-1] >= seedsWaterNeedsMin[nSeedType]) && (seedsFertilizerCount[nRow-1][nCol-1] >= seedsFertlizerNeedsMin[nSeedType])) {
 				seedsCropStatus[nRow-1][nCol-1] = 'H';
+
 				System.out.println("Plant: " + farmerUSer.getFarmerSeedList()[nSeedType]);
 				System.out.println("Status: Time to Harvest");
 				System.out.println("The plant is ready to harvest! Congrats!\n");
@@ -105,13 +99,12 @@ public class Seeds {
 			}
 		}
 		else {
-			seedsCropStatus[nRow-1][nCol-1] = 'H';
+			seedsCropStatus[nRow-1][nCol-1] = 'W';
 			System.out.println("Plant: " + farmerUSer.getFarmerSeedList()[nSeedType]);
 			System.out.println("Withered");
 			System.out.println("The plant has wilted please remove it immediately\n");
 		}
 
-		//return cStatus; 
 	}
 	
 	
@@ -123,7 +116,6 @@ public class Seeds {
 		seedsFertilizerCount[nRow-1][nCol-1] = seedsFertilizerCount[nRow-1][nCol-1] + 1;
 	}
 
-	
 
 	/* Getters and Setters */
 	public void setSeedsCropHarvestTime( int[] seedsCropHarvestTime ) {
