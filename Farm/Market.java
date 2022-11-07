@@ -8,18 +8,26 @@
  * choiceIndex- the integer of the user input choice */
 
 
+
+
 public class Market {
     private int nTotalGoldCoins;
+    
+    // Buy
     private int[] nSeedPerCrop;
     private int nTotalNumSeeds;
     private String[] marketSeeds;
     private int[] marketPrices;
     private int choiceIndex;
 
+    // Sell
     
-    /* Methods */
+    private int[] marketCropSellingPrice;
 
-    public void transactionBuySeeds( String[] marketSeeds, int[] marketPrices, int choiceIndex, int nPurchaseSeeds) {
+
+
+    /* Methods */
+    public void transactionBuySeeds( int choiceIndex, int nPurchaseSeeds) {
         switch( choiceIndex ) {
             case 0:     nTotalGoldCoins = nTotalGoldCoins - (marketPrices[choiceIndex] * nPurchaseSeeds);
                         if(nTotalGoldCoins > 0) {
@@ -75,8 +83,17 @@ public class Market {
 
     } // End of transactionBuySeeds method
 
-    public void transactionSellCrops( String[] marketSeeds, int[] marketPrices, int choiceIndex ) {
+    public void transactionSellCrops( int choiceIndex, int nSoldCrops ) {
         System.out.println("Sell crops!\n");
+
+        switch(choiceIndex-1) {
+            case 0:     nTotalGoldCoins = nTotalGoldCoins + (marketPrices[choiceIndex-1] * nSoldCrops);
+                        System.out.println(marketSeeds[choiceIndex-1] + " is sold!");
+                        System.out.println("Total income: " + (marketPrices[choiceIndex-1] * nSoldCrops) + "g");
+                        nSeedPerCrop[choiceIndex-1] = nSeedPerCrop[choiceIndex-1] - nSoldCrops;
+                        break;
+        }
+
 
     } // End of transactionSellCrops
 
@@ -128,4 +145,14 @@ public class Market {
     public int getChoiceIndex( ) {
         return choiceIndex;
     }
+
+    public void setMarketCropSellingPrice( int[] marketCropSellingPrice ) {
+        this.marketCropSellingPrice = marketCropSellingPrice;
+    }
+
+    public int[] getMarketCropSellingPrice( ) {
+        return marketCropSellingPrice;
+    }
+
+
 }
