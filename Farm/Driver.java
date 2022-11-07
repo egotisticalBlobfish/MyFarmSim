@@ -5,7 +5,7 @@ the functions and their respective algorithms and corresponding code by
 myself. The program was run, tested, and debugged by my own efforts. I 
 further certify that I have not copied in part or whole or otherwise 
 plagiarized the work of other students and/or persons.
-<Amelia Joyce Abenoja> - <Id Number> - <S13>
+<Amelia Joyce Abenoja> - <12108107> - <S14>
 <Alexandra G. Padua> - <12116343> - <S13>
 ******************************************************************************/
 
@@ -75,13 +75,13 @@ public class Driver {
         int i, j, k;
 
         int[][] arrSeedsWaterCount = new int[10][5];				// Stores the amount how many times a crops was watered
-	    int[][] arrSeedsFertilizerCount = new int[10][5];			// Stores the amount how many time a crop was fertilized
-	    int[][] arrSeedsDaysGrowth = new int[10][5];				// Stores the days counts of a crop before the harvest
+	int[][] arrSeedsFertilizerCount = new int[10][5];			// Stores the amount how many time a crop was fertilized
+	int[][] arrSeedsDaysGrowth = new int[10][5];				// Stores the days counts of a crop before the harvest
         char[][] arrSeedCropStatus = new char[10][5];
 
-        int[] arrHarvestedCropsList = new int[8];                   // number of products harvested per crop
+        int[] arrHarvestedCropsList = new int[8];                   		// number of products harvested per crop
 
-
+	// Initialized the default values
         for( k=0; k<8; k++ ) {
             arrSeedsPerCrop[k] = 0;
             arrHarvestedCropsList[k] = 0;
@@ -98,7 +98,7 @@ public class Driver {
         }
 
         String[] arrSeedList = {"Turnip","Carrot","Potato","Rose","Tulips","Sunflower","Mango","Apple"};
-		int[] arrPriceList = {5, 10, 20, 5, 10, 20, 100, 200};
+	int[] arrPriceList = {5, 10, 20, 5, 10, 20, 100, 200};							
         
 
         String[] arrToolList = {"Plow", "Plant", "Watering Can", "Fertilizer", "Harvest", "Pickaxe", "Shovel"};
@@ -111,7 +111,6 @@ public class Driver {
         int[] arrSellingPrice = {6, 9, 3, 5, 9, 19, 8, 5};
         
 
-
         // Non-default values
         int nChoiceConfirmExit;
         int nChoiceWork;
@@ -122,7 +121,6 @@ public class Driver {
 
         int nChoiceMarket;
         int nChoiceSeed;
-        //int nChoiceSell;
         int nChoiceCrop;
 
         int nPlowFieldRow;
